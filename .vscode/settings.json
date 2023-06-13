@@ -1,0 +1,7 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./programs/renec-dapp-template/Cargo.toml",
+        "./programs/renec-dapp-template/Cargo.toml"
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false
+}
