@@ -4,11 +4,9 @@ use crate::NumberBucket;
 
 #[derive(Accounts)]
 pub struct DecreaseNumber<'info> {
-    #[account(init_if_needed,
+    #[account(mut,
         seeds = [b"number".as_ref(), authority.key.as_ref()],
         bump,
-        payer = authority,
-        space = NumberBucket::LEN,
     )]
     pub number: Account<'info, NumberBucket>,
     #[account(mut)]
@@ -19,8 +17,9 @@ pub struct DecreaseNumber<'info> {
     pub rent: Sysvar<'info, Rent>,
 }
 
-pub fn handler(ctx: Context<DecreaseNumber>, amount: u64) -> Result<()> {
+pub fn decrease(ctx: Context<DecreaseNumber>, amount: u64) -> Result<()> {
     let number = &mut ctx.accounts.number;
     number.data -= amount;
+    msg!("Decreased number bucket by {}", amount);
     Ok(())
 }

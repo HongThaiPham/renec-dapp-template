@@ -3,10 +3,12 @@ use anchor_lang::prelude::*;
 use crate::NumberBucket;
 
 #[derive(Accounts)]
-pub struct IncreaseNumber<'info> {
-    #[account(mut,
+pub struct InitNumber<'info> {
+    #[account(init_if_needed,
         seeds = [b"number".as_ref(), authority.key.as_ref()],
         bump,
+        payer = authority,
+        space = NumberBucket::LEN,
     )]
     pub number: Account<'info, NumberBucket>,
     #[account(mut)]
@@ -17,9 +19,9 @@ pub struct IncreaseNumber<'info> {
     pub rent: Sysvar<'info, Rent>,
 }
 
-pub fn increase(ctx: Context<IncreaseNumber>, amount: u64) -> Result<()> {
+pub fn init(ctx: Context<InitNumber>) -> Result<()> {
     let number = &mut ctx.accounts.number;
-    number.data += amount;
-    msg!("Increased number bucket by {}", amount);
+    number.data = 0;
+    msg!("Initialized number bucket");
     Ok(())
 }

@@ -7,7 +7,7 @@ pub use schemas::*;
 pub mod instructions;
 pub use instructions::*;
 
-declare_id!("2DGkbVKhZsSjmygWkPhfJDYdDwmDKy7wHfKVaNgPdu3e");
+declare_id!("6wBc9H72HZfydu1xUhrB3JTD7WYbN1XLEJ73M1nLDoPk");
 
 #[program]
 pub mod renec_dapp_template {
@@ -18,11 +18,15 @@ pub mod renec_dapp_template {
     }
 
     pub fn increase_number(ctx: Context<IncreaseNumber>, number: u64) -> Result<()> {
-        instructions::increase_number::handler(ctx, number)
+        instructions::buckets::increase_number::increase(ctx, number)
     }
 
     pub fn decrease_number(ctx: Context<DecreaseNumber>, number: u64) -> Result<()> {
-        instructions::decrease_number::handler(ctx, number)
+        instructions::buckets::decrease_number::decrease(ctx, number)
+    }
+
+    pub fn initialize_number_bucket(ctx: Context<InitNumber>) -> Result<()> {
+        instructions::buckets::init_number::init(ctx)
     }
 }
 

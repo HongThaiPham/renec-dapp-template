@@ -63,7 +63,7 @@ solana program deploy target/deploy/renec_dapp_template.so --keypair /home/leo/.
 
 /// or
 
-anchor deploy --provider.cluster $RENEC_TESTNET_URL --provider.wallet /home/leo/.config/solana/renec1.json 
+anchor deploy --provider.cluster $RENEC_TESTNET_URL --provider.wallet /home/leo/.config/solana/renec1.json
 ```
 
 ## When deploy error
@@ -71,4 +71,15 @@ anchor deploy --provider.cluster $RENEC_TESTNET_URL --provider.wallet /home/leo/
 ```bash
 solana-keygen recover -o recover.json
 solana program close recover.json
+```
+
+## Client App
+
+Packages:
+
+```bash
+@solana/wallet-adapter-base
+@solana/wallet-adapter-react
+@solana/wallet-adapter-react-ui
+encoding
 ```
